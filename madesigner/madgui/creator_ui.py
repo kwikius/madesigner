@@ -16,7 +16,8 @@ from PyQt5.QtWidgets import (QApplication, QWidget,
                              QHBoxLayout, QVBoxLayout, QFrame, QFormLayout,
                              QPushButton, QTabWidget, QGroupBox,
                              QLineEdit, QTextEdit, QLabel, QScrollArea,
-                             QInputDialog, QMenu, QMessageBox)
+                             QInputDialog, QMenu, QMessageBox, QFileDialog,
+                             QErrorMessage)
 from PyQt5.QtGui import QCursor
 
 from props import PropertyNode
@@ -368,9 +369,10 @@ class CreatorUI(QWidget):
 
         if startdir == None:
             startdir = os.path.expanduser("~")
-        filename = QFileDialog.getOpenFileName(self, "Open File",
+        result = QFileDialog.getOpenFileName(self, "Open File",
                                                      startdir,
                                                      "MAdesigner (*.mad)")
+        filename = result[0]
         if ( filename == "" ):
             return
         self.load(str(filename))
@@ -399,9 +401,10 @@ class CreatorUI(QWidget):
 
     def setFileName(self):
         startdir = os.path.expanduser("~/newdesign.mad")
-        return QFileDialog.getSaveFileName(self, "Save File",
+        result= QFileDialog.getSaveFileName(self, "Save File",
                                                  startdir,
                                                  "MAdesigner (*.mad)")
+        return result[0]
 
     def gen_property_tree(self):
         # create a new design root
@@ -433,9 +436,10 @@ class CreatorUI(QWidget):
                 # print self.fileroot, ext
 
         # create the design as a property tree
-        design = gen_property_tree()
+        design = self.gen_property_tree()
 
         try:
+           # print design
             props_json.save(self.filename, design)
         except:
             print "error saving file"

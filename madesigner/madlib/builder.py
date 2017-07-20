@@ -6,6 +6,7 @@
 import re
 import sys
 import os.path
+import math
 
 # import numpy here to avoid a glitch in pyinstaller
 import numpy
@@ -502,16 +503,27 @@ class Builder():
         #     ac.close()
             
         # generate FreeCAD model
+        # add twist
         doc = freecad.GenFreeCAD()
         doc.start_model("my document")
         if len(self.wings):
+            # keep track of the accumulated twist
+            twist_accum = 0.0
             for wing in self.wings:
                 tip = [ 0.0, 0.0, 0.0 ]
+                
+                # If wing panels are linked from 0 then 
+                # incr the twist
+                # if any not linked will break the chain and reset
                 if wing.link_name != None and wing.link_name != "none":
                     i = self.find_wing_by_name( wing.link_name )
                     if i >= 0:
                         tip = self.wings[i].get_tip_pos()
-                wing.build_freecad( doc, xoffset=tip[1], yoffset=tip[2] )
+                        twist_accum += self.wings[i].twist
+                        #print "twist = " + str(twist1)
+                else:
+                    twist_accum = 0.0
+                wing.build_freecad( doc, twist=twist_accum, xoffset=tip[1], yoffset=tip[2] )
         doc.view_stl(self.dirname)
         doc.save_model(os.path.join(self.dirname, "name"));
 

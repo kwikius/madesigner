@@ -48,6 +48,28 @@ for you.
   - Optionally generate top or bottom build tabs to help with building
     alignment.
 
+# How to Install and Run
+
+* Install Python: http://www.python.org
+
+* Install required python libraries: numpy polygon2 svgwrite
+      ( Example for Debian or Ubuntu, as root or with sudo: 
+          apt-get install python-numpy python-pip python2.7-dev 
+          pip install polygon2
+          pip install svgwrite )
+
+* Download and install aura-props: https://github.com/AuraUAS/aura-props  
+    (run python setup.py --help for install details)
+
+* Download and install FreeCAD: https://www.freecadweb.org/
+   set/add an environment variable named PYTHONPATH to point to the path to FreeCAD.so (Linux) / FreeCAD.dll (Windows) file
+     (In Ubuntu, using apt to install FreeCAD, FreeCAD.so should be in/usr/lib/freecad/lib/
+
+* Download madesigner from github: https://github.com/clolsonus/madesigner
+      
+* At a command prompt, cd to the madesigner/madesigner directory, and run: 
+         python ./madesigner.py
+
 # 35,000' Overview
 
 One of the most satisfying things in life is to create something
@@ -195,8 +217,34 @@ some of the actual capabilities available right now?
 
 - (TODO) better support of custom part labels (the text and the position)
 
-
 # Road Map
+
+This is a hobby project in my spare time so I am trying to measure my
+efforts and balance good forward progress with feature complete
+design.  My design process is "iterative" and based on trying to push
+a couple real world examples through from start to finish.  When I run
+up against something I missed I will cycle back and add that feature
+and push it downstream through the whole process.  Hopefully
+eventually arriving at a useable system that doesn't do everything for
+everyone, but does a lot from start to finish.
+
+Initially I have made good progress on basic airfoil manipulation and
+cutting out notches and holes required for real world construction.
+
+Next up I will look at laying out the wing plan from the top down and
+drawing the wing from the front/side view.  I would like to be able to
+output full size plan sheets for those with a plotter big enough to
+handle them.
+
+Also, it is important to me to be able to lay out all the individual
+parts onto part sheets so they can be cut out by a laser cutter or cnc
+router.  That is the key to this whole project -- not only designing
+the plans, but doing it in a way that the parts can be quickly and
+accurately produced, and then easily assembled.
+
+Also on my radar screen is applying all these core capabilities to
+fuselage design and construction.  The shapes are different between a
+wing and a fuselage, but much of the process is analogous.
 
 This is a personal hobby project so there is no hard time line for
 future development effort.
@@ -212,7 +260,6 @@ future development effort.
 - I would like to add some helper functions to autogenerate more of
   the internal structure based on larger user preferences.
   I.e. generate a D-tube wing structure on top of the given layout.
-
 
 # Frequently Asked Questions
 

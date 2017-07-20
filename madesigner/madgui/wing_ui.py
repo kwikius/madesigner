@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (QWidget,
                              QHBoxLayout, QVBoxLayout, QFrame, QFormLayout,
                              QPushButton, QTabWidget, QGroupBox,
                              QLineEdit, QTextEdit, QLabel, QScrollArea,
-                             QInputDialog, QMenu)
+                             QInputDialog, QMenu,QFileDialog)
 
 from combobox_nowheel import QComboBoxNoWheel
 
@@ -96,9 +96,10 @@ class WingUI():
     def select_airfoil_root(self):
         basepath = os.path.split(os.path.abspath(sys.argv[0]))[0]
         airfoil_path = basepath + "/data/airfoils/"
-        filename = QFileDialog.getOpenFileName(None, "Open File",
+        result = QFileDialog.getOpenFileName(None, "Open File",
                                                      airfoil_path,
                                                      "Airfoil (*.dat)")
+        filename = result[0]
         if ( filename == "" ):
             return
         basename = os.path.basename(str(filename))
@@ -108,9 +109,10 @@ class WingUI():
     def select_airfoil_tip(self):
         basepath = os.path.split(os.path.abspath(sys.argv[0]))[0]
         airfoil_path = basepath + "/data/airfoils/"
-        filename = QFileDialog.getOpenFileName(None, "Open File",
+        result = QFileDialog.getOpenFileName(None, "Open File",
                                                      airfoil_path,
                                                      "Airfoil (*.dat)")
+        filename = result[0]
         if ( filename == "" ):
             return
         basename = os.path.basename(str(filename))

@@ -232,7 +232,7 @@ class CreatorUI(QWidget):
 
         QApplication.setOverrideCursor(QCursor(QtCore.Qt.WaitCursor))
         design = self.gen_property_tree()
-        build = Builder(design, dirname="", airfoil_resample=25,
+        build = Builder(design, dirname="/home/andy/", airfoil_resample=25,
                         circle_points=8, nest_speed="fast")
         QApplication.restoreOverrideCursor()
 

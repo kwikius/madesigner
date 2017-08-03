@@ -28,7 +28,7 @@ def myfloat(node, name):
 
 class Builder():
 
-    def __init__(self, design, dirname=None,
+    def __init__(self, design, dirname="/home/andy/",
                  airfoil_resample=25, circle_points=8,
                  nest_speed="fast"):
         # airfoil_resample: 25 = fast, 100 = mid, 1000 = quality
